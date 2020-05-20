@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .video_list {
+            width: 400px;
+            white-space: nowrap;
+            /* auto 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容 */
+            overflow-x: auto;
+        }
+        .video_list li {
+            margin-right: 25px;
+            width: 150px;
+            height: 80px;
+            line-height: 80px;
+            display: inline-block;
+            border-radius: 5px;
+            background-color: orangered;
+            overflow: hidden;
+            text-align: center;
+        }
+        .video_list li:nth-last-child(1){
+            margin-right: 0;
+        }
+        .video_list::-webkit-scrollbar{
+            display: none;
+        }
+        .txt{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;             
+            text-overflow:ellipsis;
+        }
+        .loading{
+            text-align: center;
+        }
+        .loading::after{
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
+            content: "\2026";
+            animation: ellipsis 2s infinite;
+        }
+        @keyframes ellipsis {
+            from {
+                width: 2px;
+            }
+            to{
+                width: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="writing-mode:tb">
+        白日依山尽，<br/>
+        黄河入海流。<br/>
+    </div>
+    <ul class="video_list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <div style="color: coral;font-size: 30px;letter-spacing: -65px; margin-left: 200px;">
+        一段错落的文本
+    </div>
+    <div class="txt">用于文本的多行截断，蓝色lallalallaalalallalalallalall啦啦啦啦啦啦lalallalalallalallalalalalal啦啦啦啦啦啦啦啦啦啦啦啦lalalalalalalalalalalalalala啦啦啦</div>
+    <div class="loading">
+        正在加载
+     </div>
+</body>
+</html>
