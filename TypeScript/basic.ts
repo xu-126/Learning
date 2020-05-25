@@ -76,3 +76,35 @@ function make<T>(args:T) {
 }
 const num = make(2);
 
+// 在 TypeScript 的类型定义中，=> 用来表示函数的定义，
+// 左边是输入类型，需要用括号括起来，右边是输出类型。
+// 用函数表达式定义函数
+let mySum: (x: number,y: number) => number = function (x:number,y:number):number{
+  return x + y;
+}
+
+// 用接口定义函数的形状
+interface SearchFunc {
+  (source:string,substing:string):boolean
+}
+let mySearch:SearchFunc;
+mySearch = function (source:string,subString:string) {
+  return source.search(subString) !== -1;
+}
+// 可选参数必须接在必需参数后面
+// 函数参数默认值：
+// TypeScript会将添加了默认值的参数识别为可选参数（此时就不受「可选参数必须接在必需参数后面」的限制了）
+
+// 类型断言
+// 类型断言（Type Assertion）可以用来手动指定一个值的类型。
+// 值 as 类型 或者 <类型>值（不推荐）
+// 类型断言的用途：
+// 1.将一个联合类型断言为其中一个类型
+// 2.将一个父类断言为更加具体的子类
+// 3.将任何一个类型断言为 any
+// 4.将 any 断言为一个具体的类型
+// 类型断言的限制：
+// 联合类型可以被断言为其中一个类型
+// 父类可以被断言为子类
+// 任何类型都可以被断言为 any
+// any 可以被断言为任何类型
