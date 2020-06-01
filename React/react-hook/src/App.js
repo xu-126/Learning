@@ -5,6 +5,7 @@ import TodoInput from './Input'
 import TodoList from './TodoList'
 import { fetchTodos,toggleTodo,handleDelete } from './api'
 import { useRequest, useWithLoading } from './hooks'
+import Demo from './demo'
 
 import "./styles/styles.css";
 
@@ -80,6 +81,7 @@ function App() {
         <Spin spinning={loading} tip="稍等片刻~">
           <TodoList todos={data} onToggleFinished={onToggleFinished} onDelete={onDelete}/>
         </Spin>
+        <Demo />
       </div>
     </>
   );

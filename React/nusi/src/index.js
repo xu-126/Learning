@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { ConfigProvider }  from '@terminus/nusi';
+import enUS from '@terminus/nusi/es/locale/en_US'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ConfigProvider locale={enUS}>
     <App />
-  </React.StrictMode>,
+  </ConfigProvider>,
   document.getElementById('root')
 );
 
