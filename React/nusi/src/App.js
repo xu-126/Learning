@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Drawer,Button,Affix,Alert,Icon,Row,Col,Breadcrumb,Arrange,Toast, Title,Table,Tag,Container,Avatar,Badge, Divider} from '@terminus/nusi';
+import { Filter,Input,InputNumber,Select,DatePicker,Cascader,Carousel,Drawer,Button,Affix,Alert,Icon,Row,Col,Breadcrumb,Arrange,Toast, Title,Table,Tag,Container,Avatar,Badge, Divider} from '@terminus/nusi';
 
 const layout1 = {
   marginLeft: 0,
@@ -88,11 +88,156 @@ const data = [
   },
 ];
 
+// 以下为级联选项数据
+const options = [{
+  value: '浙江',
+  label: '浙江',
+  children: [{
+    value: '杭州',
+    label: '杭州',
+    children: [{
+      value: '西湖',
+      label: '西湖',
+    }],
+  }],
+}, {
+  value: '江苏',
+  label: '江苏',
+  children: [{
+    value: '南京',
+    label: '南京',
+  }],
+}];
 
+function onChange(value) {
+  console.log(value);
+}
+
+// 以下为 Filter 中数据
+const { RangeInputNumber } = InputNumber;
+const { RangePicker } = DatePicker;
+
+const config = [
+  {
+    type: Input,
+    label: '门店名称',
+    name: 'storeName',
+    customProps: {
+      placeholder: '门店名称',
+    },
+  },
+  {
+    type: RangeInputNumber,
+    label: '时效范围',
+    name: 'range',
+    customProps: {
+      min: 1,
+      max: 10,
+      leftProps: {
+        placeholder: '起始'
+      },
+      rightProps: {
+        placeholder: '结束'
+      }
+    },
+  },
+  {
+    type: InputNumber,
+    label: '店龄',
+    name: 'storeHistory',
+  },
+  {
+    type: Input,
+    label: '门店编号',
+    name: 'storeId',
+    validator: [{ max: 3, message: '最多3个字' }],
+    customProps: {
+      placeholder: '门店编号',
+    },
+  },
+  {
+    type: Input,
+    label: '门店责任人',
+    name: 'storeOwner',
+    customProps: {
+      placeholder: '门店责任人',
+    },
+  },
+  {
+    type: Select,
+    label: '订单状态',
+    name: 'status',
+    customProps: {
+      style: {
+        width: '100%',
+      },
+      options: [
+        {
+          label: '未完成',
+          value: 1,
+        },
+        {
+          label: '已完成',
+          value: 2,
+        },
+      ],
+    },
+  },
+  {
+    type: Select,
+    label: '订单金额',
+    name: 'money',
+    customProps: {
+      style: {
+        width: '100%',
+      },
+      options: [
+        {
+          label: 200,
+          value: 1,
+        },
+        {
+          label: 3000,
+          value: 2,
+        },
+      ],
+      mode: 'multiple',
+    },
+  },
+  {
+    type: RangePicker,
+    label: '订单日期',
+    validator: [{ required: true }],
+    name: 'order-date',
+  },
+];
+
+function onReset (values)  {
+  console.log('on reset',values)
+}
+function onSubmit  (values ) {
+  console.log(values)
+}
 function App() {
+  
   const [visible,setVisible] = useState(false)
   return (
     <div>
+      <Title title="过滤器-Filter"></Title>
+      <Filter showSolutionConfig config={config} onReset={onReset} onSubmit={onSubmit} showCollapse="true" title="条件查询"></Filter>
+      <Title title="级联选择-Cascader"></Title>
+      <Cascader options={options} onChange={onChange} placeholder="Please select"></Cascader>
+      <Title title="轮播器-Carousel"></Title>
+      <div style={{width:'300px',height:'200px'}}>
+        <Carousel  arrows slidesToShow={2} slidesToScroll={2}>
+          <div><img src='https://terminus-paas.oss-cn-hangzhou.aliyuncs.com/terminus-official-website/images/case/haier.jpg' width='100%' /></div>
+          <div><img src='https://terminus-paas.oss-cn-hangzhou.aliyuncs.com/terminus-official-website/images/case/wanke.jpg' width='100%' /></div>
+          <div><img src='https://terminus-paas.oss-cn-hangzhou.aliyuncs.com/terminus-official-website/images/case/wanglijituan.jpg' width='100%' /></div>
+          <div><img src='https://terminus-paas.oss-cn-hangzhou.aliyuncs.com/terminus-official-website/images/case/jinyujidong.jpg' width='100%' /></div>
+          <div><img src='https://terminus-paas.oss-cn-hangzhou.aliyuncs.com/terminus-official-website/images/case/sanlishi.jpg' width='100%' /></div>
+          <div><img src='https://terminus-paas.oss-cn-hangzhou.aliyuncs.com/terminus-official-website/images/case/haixin.jpg' width='100%' /></div>
+        </Carousel>
+      </div>
       <Title title="抽屉-Drawer"></Title>
       <Button type="primary" onClick={()=>{setVisible(true)}}>
           Open
